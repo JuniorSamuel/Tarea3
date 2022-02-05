@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sum</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Sum</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+    <div id="container">
+    <ion-item>
+      <ion-grid class="p-0">
+        <ion-row class="p-0">
+          <ion-col size="5" class="p-0">
+            <ion-input type="number" class="p-0" placeholder="89" [(ngModel)]="value.num1"></ion-input>
+          </ion-col>
+          <ion-col size="2" class="p-0">
+            <p>+</p>
+          </ion-col>
+          <ion-col size="5" class="p-0">
+            <ion-input type="number" class="p-0" placeholder="10" [(ngModel)]="value.num2"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+      <ion-button expand="block" fill="outline" mode="ios" (click)="calculate()" >Sumar</ion-button>
+    </div> 
+    <ion-list mode="ios">
+      <ion-list-header mode="ios">Resultados: <span *ngIf="value.num1 != null || value.num2 != null">{{ value.num1 + value.num2}}</span></ion-list-header>
+      <ion-item mode="ios" *ngFor="let r of results; index as i">  
+        {{ r.num1}} + {{r.num2}} = {{r.num1 + r.num2}}
+        <button class="delete" fill=clear slot="end" title="eliminar" (click)="delete(r)"><ion-icon name="trash-outline"></ion-icon></button>
+      </ion-item>
+    </ion-list>
+</ion-content>
