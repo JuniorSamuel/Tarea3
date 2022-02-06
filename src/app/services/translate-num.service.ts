@@ -35,7 +35,7 @@ export const dictionary: word[] = [
   { id: 80, text: ["ochenta"], ischange: false },
   { id: 90, text: ["noventa"], ischange: false },
   { id: 100, text: ["cien", "ciento", "cientos"], ischange: true },
-  { id: 1000, text: ["mil"], ischange: false }
+  { id: 1000, text: ["mil "], ischange: false }
 ]
 
 @Injectable({
@@ -58,18 +58,24 @@ export class TranslateNumService {
         let division: number = ~~(n / x.id);
         console.log(division);
 
-        if (n >= 2000 && n <= 100000) {
-          text += `${dictionary.find((x) => x.id === division).text[0]} ${x.text[0]} `;
-        }else if(n >= 100 && n <= 1000){
-          text += `${dictionary.find((x) => x.id === division).text[0]}${x.text[2]} `;
+        if (n >= 2000 && n <= 1000000) {
+          text += `${this.numToStrings(division)} ${x.text[0]} `;
+        }else if(n >= 200 && n < 1000){
+          let t = `${this.numToStrings(division)}${x.text[2]} `
+          if(t === 'cincocientos ')
+            text += 'quinientos ';
+          else
+            text += t;
+        }else if(n > 100 && n < 200){
+          text += `${x.text[1]} `
         }else if(x.id >= 30 && x.id <= 90 && n % x.id != 0){
-          text += `${x.text[0]} y `;
+          text += ` ${x.text[0]} y `;
         }else if(x.id  == 20 && n >20){
           text += `${x.text[1]}`
         }else if( n %x.id != 0 && x.ischange){
-          text += `${x.text[1]} `; 
+          text += `${x.text[1]}`; 
         }else{
-          text += `${x.text[0]} `;
+          text += `${x.text[0]}`;
         }
 
         n %= x.id;

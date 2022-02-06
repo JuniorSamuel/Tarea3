@@ -17,9 +17,11 @@
   <div class="content">
     <ion-item>
       <ion-label>Numero:</ion-label>
-      <ion-input type="number" [(ngModel)]="value" placeholder="3" (ionFocus)="change()"></ion-input>
+      <ion-input type="number" [(ngModel)]="value" placeholder="3" (ionChange)="change()"></ion-input>
     </ion-item>
 
-    {{result}}
+    <div id="result">
+      <p>{{result}}</p>
+    </div>
   </div>
 </ion-content>

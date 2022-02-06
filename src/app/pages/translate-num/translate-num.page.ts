@@ -7,17 +7,17 @@ import { TranslateNumService } from '../../services/translate-num.service';
   styleUrls: ['./translate-num.page.scss'],
   providers: [TranslateNumService]
 })
-export class TranslateNumPage implements OnInit {
+export class TranslateNumPage {
 
   value: number = null;
   result: string;
   constructor(private translate: TranslateNumService) { }
 
-  ngOnInit() {
-  }
-
   change(){
-    this.result = this.translate.numToStrings(this.value);
+    if(this.value >= 0 && this.value <=1000000)
+      this.result = this.translate.numToStrings(this.value);
+    else
+      this.result = 'Cantidad no validad';
   }
 
 }

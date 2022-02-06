@@ -11,7 +11,7 @@ p{
 
 ion-button{
     width: 90%;
-    margin: 5px auto;
+    margin: 1px auto;
     padding: 4px 0px;
 }
 
@@ -21,4 +21,13 @@ ion-button{
 
 .delete{
     background-color: transparent;
+}
+
+.result{
+    margin: 1rem;
+
+    p{
+        font-size:xx-large;
+        font-weight: bold;
+    }
 }
