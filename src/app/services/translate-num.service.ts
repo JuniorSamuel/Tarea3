@@ -35,7 +35,8 @@ export const dictionary: word[] = [
   { id: 80, text: ["ochenta"], ischange: false },
   { id: 90, text: ["noventa"], ischange: false },
   { id: 100, text: ["cien", "ciento", "cientos"], ischange: true },
-  { id: 1000, text: ["mil "], ischange: false }
+  { id: 1000, text: ["mil "], ischange: false },
+  { id: 1000000, text: ["un millon "], ischange: false }
 ]
 
 @Injectable({
@@ -58,12 +59,15 @@ export class TranslateNumService {
         let division: number = ~~(n / x.id);
         console.log(division);
 
-        if (n >= 2000 && n <= 1000000) {
+        if (n >= 2000 && n <= 999999) {
           text += `${this.numToStrings(division)} ${x.text[0]} `;
         }else if(n >= 200 && n < 1000){
           let t = `${this.numToStrings(division)}${x.text[2]} `
-          if(t === 'cincocientos ')
+          if(5 === division)
             text += 'quinientos ';
+          else if(9 === division){
+            text += `nove${x.text[2]} `
+          }
           else
             text += t;
         }else if(n > 100 && n < 200){
