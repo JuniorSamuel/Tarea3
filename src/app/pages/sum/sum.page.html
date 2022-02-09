@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Suma</ion-title>
+    <ion-title>Sumadora</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Suma</ion-title>
+      <ion-title size="large">Sumadora</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -27,7 +27,7 @@
             ></ion-input>
           </ion-col>
           <ion-col size="2" class="p-0">
-            <p>+</p>
+            <p>{{operation}}</p>
           </ion-col>
           <ion-col size="5" class="p-0">
             <ion-input
@@ -41,34 +41,37 @@
       </ion-grid>
     </ion-item>
 
+
+      <ion-row>
+        <ion-col size="3"><ion-button shape="round" (click)="selectButton('+')" [fill]=" operation === '+' ? 'solid' : 'outline'">+</ion-button></ion-col>
+        <ion-col size="3"><ion-button shape="round" (click)="selectButton('-')" [fill]=" operation === '-' ? 'solid' : 'outline'">-</ion-button></ion-col>
+        <ion-col size="3"><ion-button shape="round" (click)="selectButton('/')" [fill]=" operation === '/' ? 'solid' : 'outline'">/</ion-button></ion-col>
+        <ion-col size="3"><ion-button shape="round" (click)="selectButton('x')" [fill]=" operation === 'x' ? 'solid' : 'outline'">x</ion-button></ion-col>
+      </ion-row>
+
+   
     <div class="result">
-      <p>{{ value.num1 + value.num2}}</p>
+      <p>{{ getOperation(value.num1, value.num2)}}</p>
     </div>
 
-    <ion-button expand="block" fill="outline" mode="ios" (click)="calculate()"
-      >Registrar</ion-button
-    >
-  
-  <ion-list mode="ios">
-    <ion-list-header mode="ios"
-      >Resultados:
-      <span *ngIf="value.num1 != null || value.num2 != null"
-        >{{ value.num1 + value.num2}}</span
-      ></ion-list-header
-    >
-    <ion-item *ngFor="let r of results; index as i">
-      {{ r.value.num1}} + {{r.value.num2}} = {{r.value.num1 + r.value.num2}}
-      <button
-        class="delete"
-        fill="clear"
-        slot="end"
-        title="eliminar"
-        (click)="delete(r)"
-      >
-        <ion-icon name="trash-outline"></ion-icon>
-      </button>
-    </ion-item>
-    <ion-item *ngIf="!results.length" > Historial vacio </ion-item>
-  </ion-list>
-</div>
+    
+    <ion-button id="btn" expand="block" fill="outline" mode="ios" shape="round" (click)="save()">Registrar</ion-button>
+    <ion-list mode="ios">
+      <ion-list-header mode="ios">
+        Resultado
+      </ion-list-header>
+      <ion-item *ngFor="let r of results; index as i">
+        {{ r.value}}
+        <button
+          class="delete"
+          fill="clear"
+          slot="end"
+          title="eliminar"
+          (click)="delete(r)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item *ngIf="!results.length"> Historial vacio </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
